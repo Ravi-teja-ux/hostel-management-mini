@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View and manage hostel student records.">
+  <title>Manage Students | Hostel Management</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <script src="js/api.js" defer></script>
+  <script src="js/admin.js" defer></script>
+</head>
+<body class="admin-page" data-admin-page="students">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <a class="wordmark" href="admin-dashboard.html"><span class="wordmark-mark" aria-hidden="true">H</span><span>Campus house</span></a>
+      <p class="admin-nav-heading">ADMIN MENU</p>
+      <nav class="admin-nav" aria-label="Admin pages">
+        <a class="admin-nav-link" href="admin-dashboard.html">Dashboard</a>
+        <a class="admin-nav-link is-active" href="admin-students.html" aria-current="page">Students</a>
+        <a class="admin-nav-link" href="admin-rooms.html">Rooms</a>
+        <a class="admin-nav-link" href="admin-fees.html">Fees</a>
+        <a class="admin-nav-link" href="admin-leave-requests.html">Leave Requests</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <header class="admin-header">
+        <div><p class="eyebrow">ADMINISTRATION</p><h1>Students</h1><p class="admin-header-description">View and update student records.</p></div>
+        <div class="admin-user"><span class="admin-avatar" aria-hidden="true">AD</span><span>Hostel Admin</span></div>
+      </header>
+      <p class="api-message" id="admin-page-message" role="status" aria-live="polite"></p>
+      <section class="admin-table-section" aria-labelledby="students-table-title">
+        <div class="admin-section-heading admin-table-heading">
+          <div><h2 id="students-table-title">Student records</h2><p>Student data from the hostel database.</p></div>
+          <button id="add-student" class="admin-button admin-button-primary" type="button">Add student <span aria-hidden="true">+</span></button>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th scope="col">Student ID</th><th scope="col">Student Name</th><th scope="col">Course</th><th scope="col">Year</th><th scope="col">Room Number</th><th scope="col">Phone</th><th scope="col">Status</th><th scope="col">Actions</th></tr></thead>
+            <tbody id="students-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+      <footer class="admin-page-footer">
+        <button class="admin-logout" type="button" data-admin-logout>Logout <span aria-hidden="true">↗</span></button>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
