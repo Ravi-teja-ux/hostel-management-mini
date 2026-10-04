@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Submit a hostel leave request.">
+  <title>Leave Request | Hostel Management</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/api.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body class="app-page" data-student-page="leave">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="wordmark" href="dashboard.html"><span class="wordmark-mark" aria-hidden="true">H</span><span>Campus house</span></a>
+      <p class="nav-heading">STUDENT MENU</p>
+      <nav class="primary-nav" aria-label="Student pages">
+        <a class="nav-link" href="dashboard.html">Dashboard</a>
+        <a class="nav-link" href="room-details.html">Room details</a>
+        <a class="nav-link" href="fee-status.html">Fee status</a>
+        <a class="nav-link is-active" href="leave-request.html" aria-current="page">Leave request</a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="page-header">
+        <div><p class="eyebrow">YOUR HOSTEL</p><h1>Leave request</h1></div>
+        <div class="student-chip"><span class="avatar" aria-hidden="true" data-student-initials>--</span><span data-student-name>Loading…</span></div>
+      </header>
+      <p class="api-message" id="student-page-message" role="status" aria-live="polite"></p>
+      <section class="request-intro">
+        <h2>Planning to go out?</h2>
+        <p>Fill in the details below to submit a leave request.</p>
+      </section>
+      <section class="request-section" aria-labelledby="request-form-title">
+        <h2 id="request-form-title" class="visually-hidden">Leave request form</h2>
+        <form id="leave-form" class="leave-form">
+          <div class="form-row">
+            <div class="field">
+              <label for="leave-date">Date of leave</label>
+              <input id="leave-date" name="leaveDate" type="date" required>
+            </div>
+            <div class="field">
+              <label for="return-date">Expected return date</label>
+              <input id="return-date" name="returnDate" type="date" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="leave-reason">Reason</label>
+            <select id="leave-reason" name="reason" required>
+              <option value="">Choose a reason</option>
+              <option value="family">Visiting family</option>
+              <option value="personal">Personal work</option>
+              <option value="college">College activity</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="leave-note">Additional details <span class="optional-label">Optional</span></label>
+            <textarea id="leave-note" name="details" rows="4" maxlength="400" placeholder="Add any details that may help"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="button button-primary" type="submit">Submit request <span aria-hidden="true">→</span></button>
+            <p class="form-note">Your request will be sent to the hostel administration.</p>
+          </div>
+          <p class="form-message" id="leave-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+      <footer class="student-page-footer">
+        <button class="sign-out" type="button" data-student-logout>Logout <span aria-hidden="true">↗</span></button>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

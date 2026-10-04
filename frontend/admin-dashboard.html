@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hostel administration dashboard and summary.">
+  <title>Admin Dashboard | Hostel Management</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <script src="js/api.js" defer></script>
+  <script src="js/admin.js" defer></script>
+</head>
+<body class="admin-page" data-admin-page="dashboard">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <a class="wordmark" href="admin-dashboard.html"><span class="wordmark-mark" aria-hidden="true">H</span><span>Campus house</span></a>
+      <p class="admin-nav-heading">ADMIN MENU</p>
+      <nav class="admin-nav" aria-label="Admin pages">
+        <a class="admin-nav-link is-active" href="admin-dashboard.html" aria-current="page">Dashboard</a>
+        <a class="admin-nav-link" href="admin-students.html">Students</a>
+        <a class="admin-nav-link" href="admin-rooms.html">Rooms</a>
+        <a class="admin-nav-link" href="admin-fees.html">Fees</a>
+        <a class="admin-nav-link" href="admin-leave-requests.html">Leave Requests</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <header class="admin-header">
+        <div><p class="eyebrow">ADMINISTRATION</p><h1>Dashboard</h1></div>
+        <div class="admin-user"><span class="admin-avatar" aria-hidden="true">AD</span><span>Hostel Admin</span></div>
+      </header>
+      <p class="api-message" id="admin-page-message" role="status" aria-live="polite"></p>
+      <section class="admin-welcome" aria-labelledby="admin-welcome-title">
+        <div>
+          <p class="eyebrow">HOSTEL OVERVIEW</p>
+          <h2 id="admin-welcome-title">Welcome to your admin portal.</h2>
+          <p>A simple overview of students, rooms, and pending requests.</p>
+        </div>
+        <span class="admin-welcome-mark" aria-hidden="true">H</span>
+      </section>
+      <section class="admin-summary-section" aria-labelledby="admin-summary-title">
+        <div class="admin-section-heading">
+          <div><h2 id="admin-summary-title">Hostel summary</h2><p>Current database records.</p></div>
+        </div>
+        <div class="admin-stats-grid">
+          <article class="admin-stat"><span class="admin-stat-label">TOTAL STUDENTS</span><strong id="total-students">Loading…</strong><span>Student records</span></article>
+          <article class="admin-stat"><span class="admin-stat-label">TOTAL ROOMS</span><strong id="total-rooms">Loading…</strong><span>Listed rooms</span></article>
+          <article class="admin-stat"><span class="admin-stat-label">OCCUPIED ROOMS</span><strong id="occupied-rooms">Loading…</strong><span>At least one occupied bed</span></article>
+          <article class="admin-stat"><span class="admin-stat-label">AVAILABLE ROOMS</span><strong id="available-rooms">Loading…</strong><span>With an available bed</span></article>
+          <article class="admin-stat admin-stat-highlight"><span class="admin-stat-label">PENDING LEAVE REQUESTS</span><strong id="pending-leaves">Loading…</strong><a href="admin-leave-requests.html">Review requests <span aria-hidden="true">→</span></a></article>
+        </div>
+      </section>
+      <section class="admin-quick-links" aria-labelledby="admin-quick-title">
+        <div class="admin-section-heading"><div><h2 id="admin-quick-title">Quick links</h2><p>Go directly to a management page.</p></div></div>
+        <div class="admin-quick-list">
+          <a href="admin-students.html">Manage student records <span aria-hidden="true">→</span></a>
+          <a href="admin-rooms.html">Review room availability <span aria-hidden="true">→</span></a>
+          <a href="admin-fees.html">Check fee payments <span aria-hidden="true">→</span></a>
+          <a href="admin-leave-requests.html">Respond to leave requests <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+      <footer class="admin-page-footer">
+        <button class="admin-logout" type="button" data-admin-logout>Logout <span aria-hidden="true">↗</span></button>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

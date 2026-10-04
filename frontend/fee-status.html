@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View your hostel fee balance and payment status.">
+  <title>Fee Status | Hostel Management</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/api.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body class="app-page" data-student-page="fees">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="wordmark" href="dashboard.html"><span class="wordmark-mark" aria-hidden="true">H</span><span>Campus house</span></a>
+      <p class="nav-heading">STUDENT MENU</p>
+      <nav class="primary-nav" aria-label="Student pages">
+        <a class="nav-link" href="dashboard.html">Dashboard</a>
+        <a class="nav-link" href="room-details.html">Room details</a>
+        <a class="nav-link is-active" href="fee-status.html" aria-current="page">Fee status</a>
+        <a class="nav-link" href="leave-request.html">Leave request</a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="page-header">
+        <div><p class="eyebrow">YOUR HOSTEL</p><h1>Fee status</h1></div>
+        <div class="student-chip"><span class="avatar" aria-hidden="true" data-student-initials>--</span><span data-student-name>Loading…</span></div>
+      </header>
+      <p class="api-message" id="student-page-message" role="status" aria-live="polite"></p>
+      <section class="fee-summary" aria-labelledby="fee-summary-title">
+        <div>
+          <p class="eyebrow">CURRENT HOSTEL FEE</p>
+          <h2 id="fee-summary-title">Loading fee status…</h2>
+          <p id="fee-summary-detail">Loading your fee record…</p>
+        </div>
+        <span class="status-pill status-due" id="fee-summary-status">Loading…</span>
+      </section>
+      <section class="detail-section" aria-labelledby="fee-history-title">
+        <div class="section-heading"><div><h2 id="fee-history-title">Fee record</h2><p>Amounts shown in Indian rupees.</p></div></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Total Fee</th><th scope="col">Paid Amount</th><th scope="col">Pending Amount</th><th scope="col">Payment Status</th></tr></thead>
+            <tbody id="student-fee-row"><tr><td colspan="4">Loading your fee record…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+      <footer class="student-page-footer">
+        <button class="sign-out" type="button" data-student-logout>Logout <span aria-hidden="true">↗</span></button>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

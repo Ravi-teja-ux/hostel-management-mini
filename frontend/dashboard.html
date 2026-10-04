@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View your hostel dashboard and student information.">
+  <title>Dashboard | Hostel Management</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/api.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body class="app-page" data-student-page="dashboard">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="wordmark" href="dashboard.html">
+        <span class="wordmark-mark" aria-hidden="true">H</span>
+        <span>Campus house</span>
+      </a>
+      <p class="nav-heading">STUDENT MENU</p>
+      <nav class="primary-nav" aria-label="Student pages">
+        <a class="nav-link is-active" href="dashboard.html" aria-current="page">Dashboard</a>
+        <a class="nav-link" href="room-details.html">Room details</a>
+        <a class="nav-link" href="fee-status.html">Fee status</a>
+        <a class="nav-link" href="leave-request.html">Leave request</a>
+      </nav>
+
+    </aside>
+
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">STUDENT PORTAL</p>
+          <h1>Dashboard</h1>
+        </div>
+        <div class="student-chip"><span class="avatar" aria-hidden="true" data-student-initials>--</span><span data-student-name>Loading…</span></div>
+      </header>
+      <p class="api-message" id="student-page-message" role="status" aria-live="polite"></p>
+
+      <section class="welcome-band" aria-labelledby="welcome-title">
+        <div>
+          <p class="eyebrow">YOUR HOSTEL DASHBOARD</p>
+          <h2 id="welcome-title">Welcome back.</h2>
+          <p>Your hostel details and everyday tasks are right here.</p>
+        </div>
+        <span class="welcome-mark" aria-hidden="true">H</span>
+      </section>
+
+      <section class="dashboard-section" aria-labelledby="overview-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="overview-title">Your overview</h2>
+            <p>Your current hostel records.</p>
+          </div>
+        </div>
+        <div class="overview-grid">
+          <a class="overview-item" href="room-details.html">
+            <span class="item-label">ROOM</span>
+            <strong id="dashboard-room">Loading…</strong>
+            <span class="item-detail">View room details <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="overview-item" href="fee-status.html">
+            <span class="item-label">FEE STATUS</span>
+            <strong id="dashboard-fee-status">Loading…</strong>
+            <span class="item-detail">Check fee details <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </section>
+
+      <section class="dashboard-section tasks-section" aria-labelledby="tasks-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="tasks-title">What would you like to do?</h2>
+            <p>Choose a page to continue.</p>
+          </div>
+        </div>
+        <div class="task-list">
+          <a class="task-link" href="room-details.html"><span>See your room assignment</span><span aria-hidden="true">→</span></a>
+          <a class="task-link" href="fee-status.html"><span>Review your fee status</span><span aria-hidden="true">→</span></a>
+          <a class="task-link" href="leave-request.html"><span>Submit a leave request</span><span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+      <footer class="student-page-footer">
+        <button class="sign-out" type="button" data-student-logout>Logout <span aria-hidden="true">↗</span></button>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

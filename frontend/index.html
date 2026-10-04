@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sign in to the Hostel Management System as a student or administrator.">
+  <title>Login | Hostel Management</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/api.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body class="login-page">
+  <!--
+    THESIS: A student should reach a hostel task without learning a complicated system.
+    OWN-WORLD: Clear wayfinding, ink-blue navigation, bright paper surfaces, and one crisp lime action color.
+    STORY: Sign in to see room and fee information or start a leave request.
+    FIRST VIEWPORT: A compact sign-in panel sits beside a strong, calm portal introduction; the primary action is directly below the fields.
+    FORM: Candidate 5, task-first student pages in one shared navigation shell; staging is a fixed desktop rail that becomes a horizontal mobile menu; seed key bea2d49f.
+  -->
+  <main class="login-layout">
+    <section class="login-intro" aria-labelledby="portal-title">
+      <a class="wordmark" href="index.html" aria-label="Hostel Management home">
+        <span class="wordmark-mark" aria-hidden="true">H</span>
+        <span>Campus house</span>
+      </a>
+      <div class="intro-copy">
+        <p class="intro-label">STUDENT &amp; ADMIN PORTAL</p>
+        <h1 id="portal-title">Hostel life,<br>in one place.</h1>
+        <p>One place for students to manage hostel life and admins to manage hostel services.</p>
+      </div>
+      <p class="intro-footnote">Student and hostel administration services</p>
+    </section>
+
+    <section class="login-panel" aria-labelledby="login-title">
+      <div class="login-form-wrap">
+        <p class="eyebrow">WELCOME BACK</p>
+        <h2 id="login-title">Welcome back</h2>
+        <p class="supporting-copy">Choose your portal and enter your login details.</p>
+        <form id="login-form">
+          <fieldset class="login-role-fieldset">
+            <legend>Continue as</legend>
+            <div class="login-role-options">
+              <label class="login-role-option">
+                <input type="radio" name="role" value="student" checked>
+                <span>Student</span>
+              </label>
+              <label class="login-role-option">
+                <input type="radio" name="role" value="admin">
+                <span>Admin</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <label id="login-id-label" for="student-id">Student ID</label>
+          <input id="student-id" name="studentId" type="text" autocomplete="username" placeholder="e.g. 26215A0535" required>
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+
+          <p class="form-note login-role-hint" id="login-role-hint">Sign in with your assigned student ID and password.</p>
+          <p class="form-message" id="login-message" role="status" aria-live="polite"></p>
+          <button class="button button-primary login-submit" id="login-submit" type="submit">Continue to dashboard <span aria-hidden="true">→</span></button>
+        </form>
+      </div>
+      <p class="panel-footer">Hostel Management System <span>·</span> Student &amp; Admin portal</p>
+    </section>
+  </main>
+</body>
+</html>

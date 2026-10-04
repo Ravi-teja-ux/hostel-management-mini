@@ -1,0 +1,27 @@
+# Maven / Java build output
+**/target/
+**/build/
+*.class
+*.jar
+
+# Frontend dependencies and generated bundles
+**/node_modules/
+**/dist/
+
+# Local secrets and environment configuration
+.env
+.env.*
+!.env.example
+
+# Logs and operating-system files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# IDE metadata
+.idea/
+.vscode/
+
+# Local design context, not project documentation
+/PRODUCT.md

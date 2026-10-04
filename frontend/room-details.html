@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View your assigned hostel room details.">
+  <title>Room Details | Hostel Management</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/api.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body class="app-page" data-student-page="room">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="wordmark" href="dashboard.html"><span class="wordmark-mark" aria-hidden="true">H</span><span>Campus house</span></a>
+      <p class="nav-heading">STUDENT MENU</p>
+      <nav class="primary-nav" aria-label="Student pages">
+        <a class="nav-link" href="dashboard.html">Dashboard</a>
+        <a class="nav-link is-active" href="room-details.html" aria-current="page">Room details</a>
+        <a class="nav-link" href="fee-status.html">Fee status</a>
+        <a class="nav-link" href="leave-request.html">Leave request</a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="page-header">
+        <div><p class="eyebrow">YOUR HOSTEL</p><h1>Room details</h1></div>
+        <div class="student-chip"><span class="avatar" aria-hidden="true" data-student-initials>--</span><span data-student-name>Loading…</span></div>
+      </header>
+      <p class="api-message" id="student-page-message" role="status" aria-live="polite"></p>
+      <section class="room-banner" aria-labelledby="room-title">
+        <div>
+          <p class="eyebrow">CURRENT ROOM ASSIGNMENT</p>
+          <h2 id="room-title">Loading room…</h2>
+          <p id="room-summary">Loading your room details…</p>
+        </div>
+        <div class="room-number" id="room-number" aria-hidden="true">—</div>
+      </section>
+      <section class="detail-section" aria-labelledby="room-info-title">
+        <div class="section-heading"><div><h2 id="room-info-title">Room information</h2><p>Details from your hostel record.</p></div></div>
+        <dl class="detail-list">
+          <div><dt>Hostel block</dt><dd id="room-block">Loading…</dd></div>
+          <div><dt>Room number</dt><dd id="room-detail-number">Loading…</dd></div>
+          <div><dt>Room type</dt><dd id="room-type">Loading…</dd></div>
+          <div><dt>Room capacity</dt><dd id="room-capacity">Loading…</dd></div>
+          <div><dt>Occupied beds</dt><dd id="room-occupied-beds">Loading…</dd></div>
+          <div><dt>Available beds</dt><dd id="room-available-beds">Loading…</dd></div>
+        </dl>
+      </section>
+      <footer class="student-page-footer">
+        <button class="sign-out" type="button" data-student-logout>Logout <span aria-hidden="true">↗</span></button>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
