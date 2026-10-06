@@ -82,7 +82,8 @@ function initializeStudentPage() {
     return;
   }
   const studentId = getStudentId();
-  if (sessionStorage.getItem(STUDENT_SESSION_KEY) !== "true" || !studentId) {
+  if (sessionStorage.getItem(STUDENT_SESSION_KEY) !== "true"
+      || !studentId || !sessionStorage.getItem("hostelAccessToken")) {
     window.location.replace("index.html");
     return;
   }
@@ -92,6 +93,8 @@ function initializeStudentPage() {
     button.addEventListener("click", () => {
       sessionStorage.removeItem(STUDENT_SESSION_KEY);
       sessionStorage.removeItem(STUDENT_ID_KEY);
+      sessionStorage.removeItem("hostelStudentName");
+      sessionStorage.removeItem("hostelAccessToken");
       window.location.assign("index.html");
     });
   });
@@ -257,18 +260,17 @@ if (loginForm) {
         body: JSON.stringify(requestBody)
       });
       if (result.role === "ADMIN") {
+        sessionStorage.clear();
+        sessionStorage.setItem("hostelAccessToken", result.accessToken);
         sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
         sessionStorage.setItem("hostelAdminName", result.name);
-        sessionStorage.removeItem(STUDENT_SESSION_KEY);
-        sessionStorage.removeItem(STUDENT_ID_KEY);
-        sessionStorage.removeItem("hostelStudentName");
         window.location.assign("admin-dashboard.html");
       } else {
+        sessionStorage.clear();
+        sessionStorage.setItem("hostelAccessToken", result.accessToken);
         sessionStorage.setItem(STUDENT_SESSION_KEY, "true");
         sessionStorage.setItem(STUDENT_ID_KEY, result.id);
         sessionStorage.setItem("hostelStudentName", result.name);
-        sessionStorage.removeItem(ADMIN_SESSION_KEY);
-        sessionStorage.removeItem("hostelAdminName");
         window.location.assign("dashboard.html");
       }
     } catch (error) {

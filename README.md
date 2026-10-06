@@ -1,36 +1,37 @@
 # Hostel Management System
 
-A beginner-friendly hostel management mini project with a plain HTML/CSS/JavaScript frontend and a Java Spring Boot/MySQL REST API. The frontend calls the backend at `http://localhost:8080`.
+A beginner-friendly hostel management mini project with a plain HTML/CSS/JavaScript frontend and a Java Spring Boot/MySQL REST API.
 
-## Run the backend
+## Start the project
 
-1. Start MySQL and make sure the `hostel_management` database exists.
-2. Set the `DB_USERNAME` and `DB_PASSWORD` environment variables to your local MySQL credentials. Do not commit credentials to the repository.
-3. From PowerShell, set the credentials and run the backend:
+1. Start the MySQL Windows service.
+2. Open the project folder and double-click `start-hostel.cmd`.
+3. Enter your MySQL password when prompted. It is requested securely and is not saved in the project.
+4. The launcher starts the frontend and backend in separate terminal windows, checks that both respond, and opens `http://127.0.0.1:5500/index.html`.
 
-   ```powershell
-   $env:DB_USERNAME = "root"
-   $env:DB_PASSWORD = "your-local-mysql-password"
-   cd backend
-   mvn spring-boot:run
-   ```
+Leave the frontend and backend terminal windows open while using the application. Closing either server window stops that server. Next time, double-click `start-hostel.cmd` again; it reuses already-running servers. If startup fails, keep the launcher open and check the backend terminal for the MySQL error.
 
-The API runs at `http://localhost:8080`. Keep the backend terminal open while using the frontend. See `backend/README.md` for database setup and endpoint examples.
+The local API runs at `http://localhost:8080`. See `backend/README.md` for database setup and endpoint examples.
 
-## Run the frontend
-
-In another PowerShell terminal from the repository root, run:
-
-```powershell
-cd frontend
-npx --yes http-server . -p 5500
-```
-
-Open `http://127.0.0.1:5500/index.html`. The backend allows development requests from `http://127.0.0.1:5500` and `http://localhost:5500`.
-
-## Demo login
+## Local demo login
 
 - Student: `26215A0535` or `26215A0536` / `student123`
 - Admin: `admin` / `admin123`
 
-The login endpoint checks the credentials, but this beginner-stage API does not issue a token or protect other endpoints. Do not expose it to the public internet or use it with real accounts.
+These sample accounts are for local practice only. Production disables sample account creation and requires an administrator password configured in Render.
+
+## Public deployment on Render
+
+The included `render.yaml` and `Dockerfile` deploy the frontend and API together over HTTPS. Before creating the Render Blueprint, make sure you have a reachable hosted MySQL database and its JDBC URL, username, and password. Render does not supply this project's MySQL database.
+
+1. Push this project to GitHub and create a Render Blueprint from the repository.
+2. Enter the hosted database JDBC URL, database username, and database password as the Blueprint's prompted secret environment values. Never put credentials in source files or commit them.
+3. Enter a unique administrator ID and a strong administrator password of at least 14 characters when prompted. Production does not create the local demo accounts.
+4. Deploy and open the HTTPS URL Render assigns to the service.
+5. After the first successful deployment has created the tables, change the Render environment variable `JPA_DDL_AUTO` from `update` to `validate` and redeploy.
+
+Logins return short-lived signed tokens. Admin APIs require an admin token; student APIs require a student token and only allow that student to access their own records. Render generates the JWT signing secret.
+
+Production does not create local demo students. After deployment, sign in with the configured administrator, then add the student, room, and fee records you want to demonstrate.
+
+This is a learning project, not a production-audited student-record system. Do not store real student personal or financial data in a public demo.

@@ -1,6 +1,6 @@
 # Hostel Management System Backend
 
-Beginner-friendly REST API built with Java 17, Spring Boot, Spring Data JPA, and MySQL. The frontend in `../frontend` communicates with the API at `http://localhost:8080`.
+Beginner-friendly REST API built with Java 17, Spring Boot, Spring Data JPA, and MySQL. In production, Spring Boot serves the frontend from the same HTTPS origin.
 
 ## MySQL setup
 
@@ -20,6 +20,8 @@ Beginner-friendly REST API built with Java 17, Spring Boot, Spring Data JPA, and
 
    Credentials are not stored in the repository. `application.properties` reads these variables; the username defaults to `root` and the password defaults to empty if not set.
 
+   From the project root, `start-hostel.cmd` prompts for the password without displaying or saving it and starts both servers.
+
 `spring.jpa.hibernate.ddl-auto=update` creates and updates entity tables for development. Do not use this setting with a production database. Hibernate's update mode is not a schema migration tool.
 
 ## Run the application
@@ -36,14 +38,24 @@ For local frontend development, `WebConfig` allows requests from `http://127.0.0
 
 ## Demo accounts
 
-- Student IDs `26215A0535` and `26215A0536`; password `student123`.
-- Admin ID `admin`; password `admin123`.
+- Local student IDs `26215A0535` and `26215A0536`; password `student123`.
+- Local admin ID `admin`; password `admin123`.
 
-Sample passwords are for local practice only. The login endpoint does not issue tokens or protect the other endpoints; do not expose this project publicly or use real accounts.
+Sample passwords are for local practice only. Login returns a short-lived signed token. Student endpoints require a student token and enforce ownership; admin endpoints require an admin token.
+
+## Deploy on Render
+
+The repository's `render.yaml` and root `Dockerfile` deploy the frontend and API as one HTTPS service. Provide a hosted MySQL JDBC URL, `DB_USERNAME`, and `DB_PASSWORD` as Render environment secrets. Use a database user scoped to this application's database rather than the MySQL root user; a database running only on your computer is not reachable by Render.
+
+Set `ADMIN_INITIAL_ID` and a strong `ADMIN_INITIAL_PASSWORD` of at least 14 characters in Render. Production disables sample account creation and provisions this administrator securely. Render generates `JWT_SECRET`; do not replace it with a committed value.
+
+Production starts without the local demo student or admin accounts. Sign in with the configured administrator to create demonstration records.
+
+The Blueprint uses `JPA_DDL_AUTO=update` for the first startup so JPA can create the tables. After the first successful deployment, change it to `validate` in Render and redeploy. `update` is only for initial development setup, not ongoing production use.
 
 ## API endpoints
 
-Base URL: `http://localhost:8080`
+Local base URL: `http://localhost:8080`. In production the API shares the Render HTTPS origin with the frontend.
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -64,7 +76,7 @@ Base URL: `http://localhost:8080`
 | `PUT` | `/api/admin/leave-requests/{id}/approve` | Approve a leave request |
 | `PUT` | `/api/admin/leave-requests/{id}/reject` | Reject a leave request |
 
-Student login request:
+Student login request (returns a signed access token):
 
 ```json
 { "studentId": "26215A0535", "password": "student123" }

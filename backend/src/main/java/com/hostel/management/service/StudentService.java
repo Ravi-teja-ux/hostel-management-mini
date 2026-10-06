@@ -21,6 +21,7 @@ import com.hostel.management.repository.FeeRepository;
 import com.hostel.management.repository.LeaveRequestRepository;
 import com.hostel.management.repository.RoomRepository;
 import com.hostel.management.repository.StudentRepository;
+import com.hostel.management.security.JwtService;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,22 +32,32 @@ public class StudentService {
     private final FeeRepository feeRepository;
     private final LeaveRequestRepository leaveRequestRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public StudentService(StudentRepository studentRepository, RoomRepository roomRepository, FeeRepository feeRepository,
-            LeaveRequestRepository leaveRequestRepository, PasswordEncoder passwordEncoder) {
+            LeaveRequestRepository leaveRequestRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.studentRepository = studentRepository;
         this.roomRepository = roomRepository;
         this.feeRepository = feeRepository;
         this.leaveRequestRepository = leaveRequestRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public LoginResponse login(LoginRequest request) {
-        Student student = findStudent(request.studentId());
+        Student student = studentRepository.findByStudentId(request.studentId())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.UNAUTHORIZED, "Invalid student ID or password"));
         if (!passwordEncoder.matches(request.password(), student.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid student ID or password");
         }
-        return new LoginResponse("Login successful", "STUDENT", student.getStudentId(), student.getName());
+        return new LoginResponse(
+                "Login successful",
+                "STUDENT",
+                student.getStudentId(),
+                student.getName(),
+                jwtService.createToken(student.getStudentId(), "STUDENT"),
+                jwtService.getExpirationSeconds());
     }
 
     public Map<String, Object> getStudentDetails(String studentId) {

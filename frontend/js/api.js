@@ -1,11 +1,17 @@
 "use strict";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = window.location.port === "5500"
+  ? `${window.location.protocol}//${window.location.hostname}:8080`
+  : "";
 
 async function apiRequest(path, options = {}) {
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), 15000);
   const headers = new Headers(options.headers || {});
+  const accessToken = sessionStorage.getItem("hostelAccessToken");
+  if (accessToken) {
+    headers.set("Authorization", `Bearer ${accessToken}`);
+  }
   if (options.body !== undefined) {
     headers.set("Content-Type", "application/json");
   }
@@ -27,6 +33,10 @@ async function apiRequest(path, options = {}) {
     }
 
     if (!response.ok) {
+      if (response.status === 401 && accessToken && !path.endsWith("/login")) {
+        sessionStorage.clear();
+        window.location.assign("index.html");
+      }
       const statusMessages = {
         400: "Some details are invalid. Check the form and try again.",
         401: "That ID or password is incorrect. Check it and try again.",
@@ -49,7 +59,7 @@ async function apiRequest(path, options = {}) {
       throw new Error("The server took too long to respond. Check that it is running, then try again.");
     }
     if (error instanceof TypeError) {
-      throw new Error("Could not reach the backend. Check that Spring Boot is running at http://localhost:8080 and try again.");
+      throw new Error("Could not reach the server. Check your connection and try again.");
     }
     throw error;
   } finally {

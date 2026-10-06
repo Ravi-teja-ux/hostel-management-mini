@@ -26,6 +26,7 @@ import com.hostel.management.repository.FeeRepository;
 import com.hostel.management.repository.LeaveRequestRepository;
 import com.hostel.management.repository.RoomRepository;
 import com.hostel.management.repository.StudentRepository;
+import com.hostel.management.security.JwtService;
 
 @Service
 @Transactional(readOnly = true)
@@ -37,16 +38,18 @@ public class AdminService {
     private final FeeRepository feeRepository;
     private final LeaveRequestRepository leaveRequestRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public AdminService(AdminRepository adminRepository, StudentRepository studentRepository,
             RoomRepository roomRepository, FeeRepository feeRepository,
-            LeaveRequestRepository leaveRequestRepository, PasswordEncoder passwordEncoder) {
+            LeaveRequestRepository leaveRequestRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.adminRepository = adminRepository;
         this.studentRepository = studentRepository;
         this.roomRepository = roomRepository;
         this.feeRepository = feeRepository;
         this.leaveRequestRepository = leaveRequestRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public LoginResponse login(AdminLoginRequest request) {
@@ -55,7 +58,13 @@ public class AdminService {
         if (!passwordEncoder.matches(request.password(), admin.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid admin ID or password");
         }
-        return new LoginResponse("Login successful", "ADMIN", admin.getAdminId(), admin.getName());
+        return new LoginResponse(
+                "Login successful",
+                "ADMIN",
+                admin.getAdminId(),
+                admin.getName(),
+                jwtService.createToken(admin.getAdminId(), "ADMIN"),
+                jwtService.getExpirationSeconds());
     }
 
     public AdminDashboardResponse getDashboard() {

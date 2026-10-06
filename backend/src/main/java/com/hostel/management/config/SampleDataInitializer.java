@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ import com.hostel.management.repository.RoomRepository;
 import com.hostel.management.repository.StudentRepository;
 
 @Component
+@Profile("!prod")
 public class SampleDataInitializer implements CommandLineRunner {
 
     private final AdminRepository adminRepository;

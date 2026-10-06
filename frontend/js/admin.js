@@ -415,7 +415,8 @@ function initializeAdminPage() {
   if (!document.body.classList.contains("admin-page")) {
     return;
   }
-  if (sessionStorage.getItem(ADMIN_SESSION_KEY) !== "true") {
+  if (sessionStorage.getItem(ADMIN_SESSION_KEY) !== "true"
+      || !sessionStorage.getItem("hostelAccessToken")) {
     window.location.replace("admin-login.html");
     return;
   }
@@ -426,6 +427,7 @@ function initializeAdminPage() {
     button.addEventListener("click", () => {
       sessionStorage.removeItem(ADMIN_SESSION_KEY);
       sessionStorage.removeItem("hostelAdminName");
+      sessionStorage.removeItem("hostelAccessToken");
       window.location.assign("admin-login.html");
     });
   });
